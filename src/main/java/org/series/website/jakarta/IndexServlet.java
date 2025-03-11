@@ -10,5 +10,9 @@ import java.io.IOException;
 public class IndexServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         request.getRequestDispatcher("/index.html").forward(request, response);
+
     }
+    // Added funtion to load stored data
+    // Added function to store user input data
 }
+
