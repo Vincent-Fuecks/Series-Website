@@ -2,7 +2,7 @@ package org.series.website.jakarta;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-public class Element {
+public class JsonElement {
     @JsonProperty("Name")
     private String Name;
 
@@ -35,6 +35,10 @@ public class Element {
 
     public void setSituation(String situation) {
         Situation = situation;
+    }
+
+    public String[] toArray(){
+        return new String[]{Name + Rating + Situation};
     }
 
     @Override

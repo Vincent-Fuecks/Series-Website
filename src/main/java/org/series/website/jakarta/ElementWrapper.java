@@ -6,14 +6,14 @@ import java.util.List;
 
 public class ElementWrapper {
     @JsonProperty("Elements")
-    private List<Element> Elements;
+    private List<JsonElement> Elements;
 
     // Getter and Setter
-    public List<Element> getElements() {
+    public List<JsonElement> getElements() {
         return Elements;
     }
 
-    public void setElements(List<Element> elements) {
+    public void setElements(List<JsonElement> elements) {
         this.Elements = elements;
     }
 }
