@@ -1,10 +1,4 @@
-async function fetchSeriesData() {
-    const response = await fetch("data/data.json");
-    const json = await response.json();
-    return json.Elements;
-}
-
-function createTable(data, headers) {
+function createTable(tableData, headers) {
     const table = document.createElement("table");
     table.setAttribute("id", "series-table");
 
@@ -17,27 +11,40 @@ function createTable(data, headers) {
     });
     table.appendChild(headerRow);
 
-    // Create Table Rows
-    data.forEach(item => {
+    // Create Table tableData
+    tableData.forEach(rowElements => {
         const row = document.createElement("tr");
-        Object.values(item).forEach(value => {
+        Object.values(rowElements).forEach(rowValue => {
             const td = document.createElement("td");
-            td.textContent = value;
+            td.textContent = rowValue;
             row.appendChild(td);
         });
         table.appendChild(row);
     });
-
-    return table;
+    document.getElementById("tableContainer").appendChild(table);
 }
 
-function displaySeries() {
-    fetchSeriesData().then(data => {
-        const headers = ["Name", "Rating", "State"];
-        const table = createTable(data, headers);
-        document.getElementById("list-puntate").appendChild(table);
-    });
-}
 
-// Run display function on page load
-window.onload = displaySeries;
+   // Fetch data from the servlet
+   fetch('/series-website/index')
+       .then(response => {
+           if (!response.ok) {
+               throw new Error('Network response was not ok');
+           }
+           return response.text();
+       })
+       .then(text => {
+           console.log('Response from server:', text);
+
+           try {
+               const data = JSON.parse(text);
+               const headers = data[0];
+               const tableData = data.slice(1);
+               createTable(tableData, headers);
+           } catch (e) {
+               console.error('Error parsing JSON:', e);
+           }
+       })
+       .catch(error => {
+           console.error('Error fetching data:', error);
+       });

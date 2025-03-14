@@ -38,7 +38,7 @@ public class JsonElement {
     }
 
     public String[] toArray(){
-        return new String[]{Name + Rating + Situation};
+        return new String[]{Name, Rating, Situation};
     }
 
     @Override

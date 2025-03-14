@@ -568,7 +568,7 @@
     </socket-binding-group>
     <deployments>
         <deployment name="series-website.war" runtime-name="series-website.war">
-            <content sha1="674a5097d93920f95c66319375b84d49b5e20af7"/>
+            <content sha1="8de93179b5f4eb4cf7b7744b491819378b58eddb"/>
         </deployment>
     </deployments>
 </server>

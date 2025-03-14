@@ -4,7 +4,7 @@
 
 ### Features
 - [x] Connect the website to a backend (Java)
-- [ ] Data import through the backend
+- [x] Data import through the backend
 - [ ] Functionality for adding new elements via the website interface
 - [ ] Store changes in local files
 - [ ] Connect the database to the backend
