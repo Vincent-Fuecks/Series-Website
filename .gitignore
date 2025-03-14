@@ -1,1 +1,32 @@
-target/*
+# Ignore Maven target directory and all its contents
+/target/
+
+# Ignore compiled classes
+*.class
+
+# Ignore dependency JARs
+*.jar
+
+# Ignore WAR file
+/*.war
+
+# Ignore Maven wrapper
+/.mvn/
+
+
+# Ignore IDE-specific files (e.g., IntelliJ, Eclipse)
+/.idea/
+/.vscode/
+/*.iml
+/.project
+/.classpath
+/.settings/
+/build/
+/*.log
+
+# Ignore sensitive and unnecessary configuration files
+*.properties
+*.log
+
+# Ignore JAR files and other binaries
+*.jar
