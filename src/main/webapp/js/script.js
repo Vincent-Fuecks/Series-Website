@@ -28,7 +28,6 @@ function createTable(tableContent, headers, tableId) {
 }
 
 function addRowsToTable(tableId, tableContent) {
-    console.log(typeof(tableContent));
     tableContent.forEach(row => {
         const htmlRow = document.createElement("tr");
         Object.values(row).forEach(rowValue => {
@@ -50,12 +49,41 @@ function handleFormSubmit(event) {
     if (event.key === "Enter" && seriesName.length !== 0 && rating.length !== 0 && status.length !== 0){
         event.preventDefault();
         
-        let tableContent = [
-            [seriesName, rating, status]
+        let tableContentForBackend = [
+            ['Name', seriesName],
+            ["Rating", rating],
+            ["Situation", status]
         ];
-    
-        addRowsToTable("tableContainer", tableContent)
-        document.getElementById("dataForm").reset();
+
+        let tableContent = [[seriesName, rating, status]];
+
+        const socket = new WebSocket('ws://localhost:8080/series-website/index');
+
+        // Open Socket and Send form content to Backend
+        socket.onopen = () => {
+            console.log("Verbindung zum WebSocket-Server hergestellt.");
+            socket.send(JSON.stringify(tableContentForBackend));
+        };
+        
+        // Only append to table new row form form, if row is stored in backend
+        // Therefore wait for convermation from backend
+        socket.onmessage = function(event) {
+            let response = JSON.parse(event.data)
+           
+            if (response.status === "success"){
+                console.log("Die Serie wurde erfolgreich hinzugefügt: " + response.message);
+                addRowsToTable("tableContainer", tableContent)
+                document.getElementById("dataForm").reset();
+            }
+        };
+        
+        socket.onerror = (error) => {
+            console.error('WebSocket Fehler:', error);
+        };
+        
+        socket.onclose = () => {
+            console.log("Verbindung zum WebSocket-Server geschlossen.");
+        };
     }
 }
 
