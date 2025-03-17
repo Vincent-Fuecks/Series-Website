@@ -33,6 +33,21 @@
             <scope>provided</scope>
         </dependency>
 
+        <!-- Jakarta RESTful Web Services (JAX-RS) API -->
+        <dependency>
+            <groupId>jakarta.ws.rs</groupId>
+            <artifactId>jakarta.ws.rs-api</artifactId>
+            <version>2.1.6</version> <!-- or use the version required for your project -->
+        </dependency>
+    
+        <!-- Jakarta API for other components if needed (like Jakarta Servlet API) -->
+        <dependency>
+            <groupId>jakarta.servlet</groupId>
+            <artifactId>jakarta.servlet-api</artifactId>
+            <version>5.0.0</version>
+            <scope>provided</scope>
+        </dependency>
+
         <!-- https://mvnrepository.com/artifact/commons-io/commons-io -->
         <dependency>
             <groupId>commons-io</groupId>

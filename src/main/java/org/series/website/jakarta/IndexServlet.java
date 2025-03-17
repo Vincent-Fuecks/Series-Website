@@ -38,6 +38,27 @@ public class IndexServlet extends HttpServlet {
         super.doPut(req, resp);
     }
 
+/*
+@Path("/add-series")
+public class SeriesResource {
+
+    // The POST method to handle adding a new series
+    @POST
+    @Consumes("application/json") // Expecting JSON data
+    public Response addSeries(Series series) {
+        // Print out the received series data (just for logging)
+        System.out.println("Received series data: " + series);
+
+        // Here you can process the data, such as saving it to a database
+        // For example: seriesService.addSeries(series);
+
+        // Send a response back to the client
+        return Response.ok("Series added successfully").build();
+    }
+}
+*/
+
+
     public static String[][] createTableContent() throws IOException {
         String json = FileUtils.readFileToString(new File("src/main/java/org/series/website/jakarta/data/data.json"), StandardCharsets.UTF_8);
 

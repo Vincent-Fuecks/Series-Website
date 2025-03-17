@@ -2,6 +2,13 @@ const htmlTable = document.createElement("table");
 const htmlInput = document.getElementById("dataForm");
 
 htmlTable.setAttribute("id", "series-table");
+
+
+async function fetchSeriesData() {
+    const response = await fetch("data/data.json");
+    const json = await response.json();
+    return json.Elements;
+}
  
 function createTable(tableContent, headers, tableId) {
     const headerRow = document.createElement("tr");
@@ -59,26 +66,13 @@ function handleFormSubmit(event) {
     }
 }
 
-// Fetch data from the servlet
-fetch('/series-website/index')
-    .then(response => {
-        if (!response.ok) {
-            throw new Error('Network response was not ok');
-        }
-        return response.text();
-    })
-    .then(text => {
-        console.log('Response from server:', text);
-
-        try {
-            const data = JSON.parse(text);
-            const headers = data[0];
-            const tableData = data.slice(1);
-            createTable(tableData, headers, "tableContainer");
-        } catch (e) {
-            console.error('Error parsing JSON:', e);
-        }
-    })
-    .catch(error => {
-        console.error('Error fetching data:', error);
+function displaySeries() {
+    fetchSeriesData().then(data => {
+        const headers = ["Name", "Rating", "State"];
+        createTable(data, headers, "tableContainer");
+        document.getElementById("tableContainer").appendChild(htmlTable);
     });
+}
+
+// Run display function on page load
+window.onload = displaySeries;

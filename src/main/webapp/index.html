@@ -3,6 +3,7 @@
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="icon" href="data:,">
         <title>Best Series</title>
         <link rel="stylesheet" href="css/styles.css">
     </head>
@@ -10,8 +11,14 @@
     <body>
         <h2>Best Series</h2>
         <div id="tableContainer"></div>
+        <form id="dataForm" onkeypress="handleFormSubmit(event)">
+            <div class="form-container">
+                <input type="text" id="seriesName" placeholder="Serienname" required>
+                <input type="text" id="rating" placeholder="Bewertung" required>
+                <input type="text" id="status" placeholder="Status" required>
+            </div>
+        </form>
 
-<!--        <div id="list-puntate"></div>-->
         <script src="js/script.js"></script>
     </body>
 </html>

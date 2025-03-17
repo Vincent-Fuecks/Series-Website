@@ -21,6 +21,34 @@
     padding-top: 12px;
     padding-bottom: 12px;
     text-align: left;
+    width: 33%;  /* Verhindert, dass die Felder zu breit oder zu schmal sind */
     background-color: #04AA6D;
     color: white;
+}
+
+/* Formular Styling, das dem Tabellen-Look entspricht */
+.form-container {
+    font-family: Arial, Helvetica, sans-serif;
+    display: flex;
+    border-collapse: collapse;
+    justify-content: space-between;
+    margin-top: 0;
+    padding-top: 0;
+}
+
+.form-container input {
+    padding: 8px;
+    border: 1px solid #ddd;
+    width: 34%;  /* Verhindert, dass die Felder zu breit oder zu schmal sind */
+    margin: 0;   /* Keine Margin zwischen den Eingabefeldern */
+    box-sizing: border-box;  /* Stellt sicher, dass padding und border in der Breite enthalten sind */
+}
+
+.form-container input:focus {
+    outline: none;
+    border-color: #04AA6D;
+}
+
+#tableContainer {
+    margin-bottom: 0;
 }
