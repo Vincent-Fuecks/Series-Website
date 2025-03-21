@@ -15,7 +15,7 @@ public class IndexWebSocket {
     private JsonFileManager jsonFileManager;
 
     public IndexWebSocket() throws IOException {
-        this.jsonFileManager = new JsonFileManager("src/main/java/org/series/website/jakarta/data/data.json");
+        this.jsonFileManager = new JsonFileManager("/home/vincent/Desktop/Repository/Series-Website/Series-Website/src/main/java/org/series/website/jakarta/data/data.json");
     }
 
     // If WebSocket connection is opend

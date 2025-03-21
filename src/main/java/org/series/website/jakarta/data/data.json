@@ -19,5 +19,21 @@
     "Name" : "Better Call Saul",
     "Rating" : "8",
     "Situation" : "Completed"
+  }, {
+    "Name" : "Andor",
+    "Rating" : "9",
+    "Situation" : "1+"
+  }, {
+    "Name" : "Supernatural",
+    "Rating" : "9",
+    "Situation" : "Abgeschlossen"
+  }, {
+    "Name" : "test",
+    "Rating" : "test",
+    "Situation" : "12"
+  }, {
+    "Name" : "sfd",
+    "Rating" : "fdf",
+    "Situation" : "dfg"
   } ]
 }

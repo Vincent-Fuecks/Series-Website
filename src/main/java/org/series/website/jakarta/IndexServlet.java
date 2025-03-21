@@ -14,10 +14,21 @@ import static org.series.website.jakarta.JsonUtils.createTableContent;
 
 @WebServlet("/index")
 public class IndexServlet extends HttpServlet {
+    private SerieRepository seriesRepository;
+
+    public IndexServlet(){
+        this.seriesRepository = new SerieRepository();
+        seriesRepository.register("Dark", 10, "Abgeschlossen");
+    }
+
+
+
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String[][] tableContent = createTableContent();
         ObjectMapper mapper = new ObjectMapper();
         String jsonData = mapper.writeValueAsString(tableContent);
+        System.out.println(jsonData);
+
 
         // Set response content type to JSON
         response.setContentType("application/json");

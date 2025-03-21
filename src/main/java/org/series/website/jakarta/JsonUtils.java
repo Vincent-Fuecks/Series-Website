@@ -14,7 +14,7 @@ import java.util.List;
 
 public class JsonUtils {
     public static String[][] createTableContent() throws IOException {
-        String json = FileUtils.readFileToString(new File("src/main/java/org/series/website/jakarta/data/data.json"), StandardCharsets.UTF_8);
+        String json = FileUtils.readFileToString(new File("/home/vincent/Desktop/Repository/Series-Website/Series-Website/src/main/java/org/series/website/jakarta/data/data.json"), StandardCharsets.UTF_8);
 
         ObjectMapper objectMapper = new ObjectMapper();
         objectMapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
