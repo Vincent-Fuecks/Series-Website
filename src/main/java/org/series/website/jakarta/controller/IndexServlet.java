@@ -1,34 +1,26 @@
-package org.series.website.jakarta;
+package org.series.website.jakarta.controller;
 
-import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import jakarta.servlet.*;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.*;
+import org.series.website.jakarta.dao.SerieRepository;
 
 import java.io.IOException;
 import java.io.PrintWriter;
 
-import static org.series.website.jakarta.JsonUtils.createTableContent;
+import static org.series.website.jakarta.util.JsonUtils.createTableContent;
 
 
 @WebServlet("/index")
 public class IndexServlet extends HttpServlet {
     private SerieRepository seriesRepository;
 
-    public IndexServlet(){
-        this.seriesRepository = new SerieRepository();
-        seriesRepository.register("Dark", 10, "Abgeschlossen");
-    }
-
-
-
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String[][] tableContent = createTableContent();
         ObjectMapper mapper = new ObjectMapper();
         String jsonData = mapper.writeValueAsString(tableContent);
         System.out.println(jsonData);
-
 
         // Set response content type to JSON
         response.setContentType("application/json");

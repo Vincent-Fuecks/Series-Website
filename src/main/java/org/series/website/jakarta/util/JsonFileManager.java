@@ -1,4 +1,4 @@
-package org.series.website.jakarta;
+package org.series.website.jakarta.util;
 
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.JsonNode;
@@ -12,14 +12,23 @@ import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.util.List;
 
-public class JsonUtils {
-    public static String[][] createTableContent() throws IOException {
-        String json = FileUtils.readFileToString(new File("/home/vincent/Desktop/Repository/Series-Website/Series-Website/src/main/java/org/series/website/jakarta/data/data.json"), StandardCharsets.UTF_8);
+public class JsonFileManager {
+    private final ObjectMapper objectMapper;
+    private final File jsonFile;
+    private final JsonNode rootNode;
 
-        ObjectMapper objectMapper = new ObjectMapper();
-        objectMapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
+    public JsonFileManager (String filePath) throws IOException {
+        this.objectMapper =  new ObjectMapper();
+        this.jsonFile = new File(filePath);
+        this.rootNode = objectMapper.readTree(jsonFile);
+    }
 
-        ElementWrapper elementWrapper = objectMapper.readValue(json, ElementWrapper.class);
+    public String[][] createTableContent() throws IOException {
+        String json = FileUtils.readFileToString(this.jsonFile, StandardCharsets.UTF_8);
+        this.objectMapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
+
+        ElementWrapper elementWrapper = this.objectMapper.readValue(json, ElementWrapper.class);
+
         String[][] tableContent = null;
         if (elementWrapper == null) {
             System.out.println("elementWrapper is null");
@@ -35,20 +44,20 @@ public class JsonUtils {
         return tableContent;
     }
 
-    public static File JsonUpdater(File jsonFile, ObjectMapper objectMapper, JsonNode rootNode, String[][] data){
+    public void jsonUpdater(String[][] data) throws IOException {
         try {
-            ArrayNode elementsArray = (ArrayNode) rootNode.path("Elements");
-            ObjectNode newSeries = objectMapper.createObjectNode();
+            ArrayNode elementsArray = (ArrayNode) this.rootNode.path("Elements");
+            ObjectNode newSeries = this.objectMapper.createObjectNode();
 
             for (String[] keyValuePair : data) {
                 newSeries.put(keyValuePair[0], keyValuePair[1]);
             }
 
             elementsArray.add(newSeries);
-            objectMapper.writerWithDefaultPrettyPrinter().writeValue(jsonFile, rootNode);
+            this.objectMapper.writerWithDefaultPrettyPrinter().writeValue(this.jsonFile, this.rootNode);
+
         } catch (IOException e) {
-            e.printStackTrace();
+            throw new IOException("Failed to update JSON file", e);
         }
-        return jsonFile;
     }
 }

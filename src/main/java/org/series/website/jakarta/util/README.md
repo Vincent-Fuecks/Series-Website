@@ -1,0 +1,2 @@
+# Info
+This folder contains helper classes that provide general utility functions that can be used across your application. These classes are not specific to any one layer but provide functionality that can be reused throughout the application.

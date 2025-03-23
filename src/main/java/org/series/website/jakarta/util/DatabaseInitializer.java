@@ -1,9 +1,10 @@
-package org.series.website.jakarta;
+package org.series.website.jakarta.util;
 
 import jakarta.ejb.Singleton;
 import jakarta.ejb.Startup;
 import jakarta.annotation.PostConstruct;
 import jakarta.inject.Inject;
+import org.series.website.jakarta.dao.SerieRepository;
 
 @Singleton
 @Startup

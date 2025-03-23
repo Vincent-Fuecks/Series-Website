@@ -1,4 +1,4 @@
-package org.series.website.jakarta;
+package org.series.website.jakarta.dao;
 
 import jakarta.ejb.Singleton;
 import jakarta.persistence.EntityManager;
@@ -6,6 +6,7 @@ import jakarta.persistence.PersistenceContext;
 import jakarta.persistence.criteria.CriteriaBuilder;
 import jakarta.persistence.criteria.CriteriaQuery;
 import jakarta.persistence.criteria.Root;
+import org.series.website.jakarta.model.Serie;
 
 import java.util.List;
 @Singleton

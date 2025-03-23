@@ -1,4 +1,4 @@
-package org.series.website.jakarta;
+package org.series.website.jakarta.util;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 

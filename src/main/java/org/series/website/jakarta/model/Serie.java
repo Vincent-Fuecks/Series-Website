@@ -1,4 +1,4 @@
-package org.series.website.jakarta;
+package org.series.website.jakarta.model;
 
 import jakarta.json.bind.annotation.JsonbProperty;
 import jakarta.persistence.*;
