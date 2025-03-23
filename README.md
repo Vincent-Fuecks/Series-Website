@@ -8,4 +8,5 @@
 - [x] Functionality for adding new elements via the website interface
 - [x] Store changes in local files
 - [x] Connect the database to the backend
+- [ ] Integrate the database into the project
 - [ ] Add import API for existing 'Best Series List' 
