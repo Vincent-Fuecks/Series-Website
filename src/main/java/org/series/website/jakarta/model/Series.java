@@ -7,7 +7,7 @@ import lombok.Data;
 @Data
 @Entity
 @Table(name = "serie")
-public class Serie {
+public class Series {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @JsonbProperty("id")
@@ -28,6 +28,12 @@ public class Serie {
     public void setName(String name) { this.name = name; }
     public void setRating(int rating) { this.rating = rating; }
     public void setStatus(String status) { this.status = status; }
+
+    public void setSeries(String name, int rating, String status){
+        this.name = name;
+        this.rating = rating;
+        this.status = status;
+    }
 
 
 }

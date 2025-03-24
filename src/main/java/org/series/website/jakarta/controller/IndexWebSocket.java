@@ -1,22 +1,29 @@
 package org.series.website.jakarta.controller;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import jakarta.websocket.OnClose;
-import jakarta.websocket.OnMessage;
-import jakarta.websocket.OnOpen;
-import jakarta.websocket.Session;
+import jakarta.inject.Inject;
+import jakarta.websocket.*;
 import jakarta.websocket.server.ServerEndpoint;
-import org.series.website.jakarta.util.JsonFileManager;
+import jakarta.ws.rs.GET;
+import jakarta.ws.rs.Produces;
+import jakarta.ws.rs.core.MediaType;
+import jakarta.ws.rs.core.Response;
+import org.series.website.jakarta.model.Message;
+import org.series.website.jakarta.model.MessageEncoder;
+import org.series.website.jakarta.model.Series;
+import org.series.website.jakarta.services.SeriesService;
 
 import java.io.IOException;
+import java.util.List;
 
-@ServerEndpoint("/index")
+@ServerEndpoint(
+        value = "/index-web-socket",
+        encoders = { MessageEncoder.class }
+)
 public class IndexWebSocket {
-    private JsonFileManager jsonFileManager;
 
-    public IndexWebSocket() throws IOException {
-        this.jsonFileManager = new JsonFileManager("/home/vincent/Desktop/Repository/Series-Website/Series-Website/src/main/java/org/series/website/jakarta/data/data.json");
-    }
+    @Inject
+    private SeriesService seriesService;
 
     // If WebSocket connection is opend
     @OnOpen
@@ -26,16 +33,14 @@ public class IndexWebSocket {
 
     // If message from client is resaved
     @OnMessage
-    public void onMessage(String message, Session session) throws IOException {
-        try {
+    @Produces(MediaType.APPLICATION_JSON)
+    public void onMessage(String message, Session session) throws IOException, EncodeException {
+            System.out.println(message);
             ObjectMapper objectMapper = new ObjectMapper();
-            String[][] receivedMessage = objectMapper.readValue(message, String[][].class);
-
-            this.jsonFileManager.jsonUpdater(receivedMessage);
-            session.getBasicRemote().sendText("{\"status\":\"success\", \"message\":\"Server added Series to Storage\"}");
-        } catch (IOException e) {
-            session.getBasicRemote().sendText("Error processing the message");
-        }
+            String[] receivedMessage = objectMapper.readValue(message, String[].class);
+            Long seriesId = seriesService.storeSeries(receivedMessage[0], Integer.parseInt(receivedMessage[1]), receivedMessage[2]);
+            Message response = new Message("success", seriesService.findById(seriesId));
+            session.getBasicRemote().sendObject(response);
     }
 
     // If WebSocket is closed
